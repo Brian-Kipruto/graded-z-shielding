@@ -1,0 +1,34 @@
+# macros/vis.mac
+# Visualization setup for interactive mode.
+# Loaded automatically by main.cc when no batch macro is given.
+
+# Use the OpenGL Qt driver — gives a real graphical window with menus
+/vis/open OGL 800x600-0+0
+
+# Draw the geometry tree
+/vis/drawVolume
+
+# Default viewing angle: looking from slightly off-axis
+/vis/viewer/set/viewpointThetaPhi 60 30
+
+# Show coordinate axes at origin (length 30 cm)
+/vis/scene/add/axes 0 0 0 30 cm
+
+# Trajectory drawing
+/vis/scene/add/trajectories smooth
+/vis/modeling/trajectories/create/drawByCharge
+/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
+
+# Accumulate trajectories across multiple events (don't refresh per event)
+/vis/scene/endOfEventAction accumulate
+
+# Add some helpful overlays
+/vis/scene/add/eventID
+/vis/scene/add/scale 10 cm
+
+# Re-render the scene with everything configured
+/vis/viewer/refresh
+
+# Notify the user that vis is set up
+/vis/viewer/flush
